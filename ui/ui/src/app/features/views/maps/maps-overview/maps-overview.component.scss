@@ -1,0 +1,32 @@
+.outer-map-wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  .map-wrapper {
+    height: 350px;
+
+    agm-map {
+      height: 97%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.app-map-page-loader {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+}
+
+.gm-style-iw {
+  height: 100px;
+  width: 300px;
+}

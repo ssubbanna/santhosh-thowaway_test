@@ -1,0 +1,188 @@
+<div class="container-fluid" style="height: 100%; width:100%; padding-left: 0; padding-right: 0;">
+  <div class="row" style="height: 100%; width:100%; margin-right: 0; margin-left: 0;">
+    <div class="col tree-sidebar">
+      <app-systems-tree [refreshTopNodes]="refreshDomainTree" (OnAddDomainNode)="addDomainNode()"></app-systems-tree>
+    </div>
+
+    <div class="col" style="overflow: auto; padding-bottom: 15px; padding-left: 0; padding-right: 0;">
+      <!--<nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let t of tabs; "
+           (click)="activeTab = t.name"
+           [active]="activeTab == t.name"> {{t.label}} </a>
+      </nav>-->
+      <mat-tab-group id="systems-header" color="accent" class="app-systems-tab-group" #tabGroup [@.disabled]="true">
+        <mat-tab mat-stretch-tabs *ngFor="let t of tabs;">
+          <ng-template mat-tab-label>
+            {{t.label}}
+          </ng-template>
+          <ng-template matTabContent>
+            <div class="row" style="margin-right: 0; margin-left: 0;" *ngIf="t.name === 'devices'">
+              <div class="app-systems-page-loader" *ngIf="isLoading">
+                <div style="text-align: center">Loading Devices...</div>
+                <sk-wave [color]="'#461892'"></sk-wave>
+              </div>
+              <div class="app-systems-table-padding" style="width: 100%;">
+                <div class="mat-elevation-z2 app-full-table-container">
+                  <div [ngClass]="{'loading-shade': isLoading}">
+                    <mat-toolbar class="app-systems-table-toolbar" style="height: 50px;">
+                      <span fxFlex></span>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Group By" tooltipPosition="bottom" style="color:#666666;">group_work
+                        </mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Export" tooltipPosition="bottom" style="color:#666666;">get_app</mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Tags" tooltipPosition="bottom" style="color:#666666;">label</mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Filter" tooltipPosition="bottom" style="color:#666666;">filter_list
+                        </mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Sort" tooltipPosition="bottom" style="color:#666666;">swap_vert</mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Columns" tooltipPosition="bottom" style="color:#666666;">table_chart
+                        </mat-icon>
+                      </button>
+                      <button mat-icon-button>
+                        <mat-icon pTooltip="Search" tooltipPosition="bottom" style="color:#666666;">search</mat-icon>
+                      </button>
+                    </mat-toolbar>
+
+                    <div class="app-systems-table-container">
+                      <table mat-table [dataSource]="dataSource" multiTemplateDataRows  style="min-width: 114vh;">
+
+                        <ng-container *ngFor="let column of tableColumns" matColumnDef="{{column.columnDef}}">
+                          <th mat-header-cell *matHeaderCellDef> {{column.header}}</th>
+                          <td mat-cell *matCellDef="let element"> {{element[column.cell]}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="expandedDetail">
+                          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                            <div class="app-device-detail"
+                                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                              <div class="app-system-expanded-device-image">
+                                <img  [src]="imageToShow" onError="this.src='';">
+                              </div>
+                              <table>
+                                <tr>
+                                  <th  class="">{{element.deviceDisplayFamily}}</th>
+                                  <th class="app-system-expanded-border app-system-expanded-th">Alarms</th>
+                                  <th class="app-system-expanded-border app-system-expanded-th">Firmware</th>
+                                  <th class="app-system-expanded-border app-system-expanded-th">Archived</th>
+                                  <th class="app-system-expanded-border app-system-expanded-th">Path</th>
+                                </tr>
+                                <tbody>
+                                <tr>
+                                  <td class="">&nbsp;</td>
+                                  <td class="app-system-expanded-border">None</td>
+                                  <td class="app-system-expanded-border">{{element.firmware}}</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-color app-system-expanded-border">{{element.sitePath}}</td>
+                                </tr>
+                                <tr>
+                                  <td class="">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td class="">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border">&nbsp;</td>
+                                  <td class="app-system-expanded-border"><h6 class="app-system-expanded-cell-heading">LOCATION</h6>{{element.sysLocation}}</td>
+                                </tr>
+                                <tr>
+                                  <td class=""><button class="app-system-expanded-button" mat-flat-button color="accent">OPEN</button></td>
+                                  <td class="app-system-expanded-border-button"><button class="app-system-expanded-button" mat-button color="accent">OPEN</button></td>
+                                  <td class="app-system-expanded-border-button"><button class="app-system-expanded-button" mat-button color="accent">UPGRADE</button></td>
+                                  <td class="app-system-expanded-border-button"><button class="app-system-expanded-button" mat-button color="accent">ARCHIVE</button></td>
+                                  <td class="app-system-expanded-border app-system-expanded-color"><h6 class="app-system-expanded-cell-heading">CONTACT</h6>{{element.sysContact}}</td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+                            class="devices-row"
+                            (click)="rowExpanded(element)"
+                            [class.example-expanded-row]="expandedElement === element"
+                            (click)="expandedElement = element">
+                        </tr>
+                        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="device-detail-row"></tr>
+                      </table>
+                    </div>
+                  </div>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <!-- <div class="col" style="overflow: auto; padding-bottom: 15px;">
+       <div class="row " style="margin-right: 15px; margin-left: 15px;">
+         <div class="app-systems-page-loader" *ngIf="isLoading">
+           <div style="text-align: center">Loading Devices...</div>
+           <sk-wave [color]="'#461892'"></sk-wave>
+         </div>
+         <div class="app-systems-table-padding" style="width: 100%;">
+           <mat-toolbar class="mat-elevation-z2" style="height: 50px;">
+             <span fxFlex></span>
+             <button  mat-icon-button >
+               <mat-icon pTooltip="Enter your username" tooltipPosition="bottom"  style="color:#666666;">group_work</mat-icon>
+             </button>
+             <button matTooltip="Export" mat-icon-button >
+               <mat-icon style="color:#666666;">get_app</mat-icon>
+             </button>
+             <button matTooltip="Tags" mat-icon-button>
+               <mat-icon style="color:#666666;">label</mat-icon>
+             </button>
+             <button matTooltip="Filter" mat-icon-button>
+               <mat-icon style="color:#666666;">filter_list</mat-icon>
+             </button>
+             <button matTooltip="Sort" mat-icon-button>
+               <mat-icon style="color:#666666;">swap_vert</mat-icon>
+             </button>
+             <button matTooltip="Columns" mat-icon-button>
+               <mat-icon style="color:#666666;">table_chart</mat-icon>
+             </button>
+             <button matTooltip="Search" mat-icon-button>
+               <mat-icon style="color:#666666;">search</mat-icon>
+             </button>
+           </mat-toolbar>
+
+           <div class="app-systems-table-container mat-elevation-z2">
+             <table mat-table [dataSource]="dataSource">
+               <ng-container matColumnDef="deviceName">
+                 <th mat-header-cell *matHeaderCellDef>NAME</th>
+                 <td mat-cell *matCellDef="let element">{{element.deviceName}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="sitePath">
+                 <th mat-header-cell *matHeaderCellDef>PATH</th>
+                 <td mat-cell *matCellDef="let element">{{element.sitePath}}</td>
+               </ng-container>
+
+               <ng-container matColumnDef="ip">
+                 <th mat-header-cell *matHeaderCellDef>IP ADDRESS</th>
+                 <td mat-cell *matCellDef="let element">{{element.ip}}</td>
+               </ng-container>
+
+               <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+             </table>
+           </div>
+         </div>
+       </div>
+     </div>-->
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="header">
+  <h1 mat-dialog-title>{{ options.title }}</h1>
+</div>
+<mat-dialog-content>
+  <p [innerHTML]="options.text"></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="options.confirmAction" mat-raised-button color="primary" (click)="confirmAction()">
+    {{options.confirmText}}
+  </button>
+  <button *ngIf="options.cancelAction" mat-raised-button color="accent" (click)="cancelAction()">{{options.cancelText}}
+  </button>
+</mat-dialog-actions>

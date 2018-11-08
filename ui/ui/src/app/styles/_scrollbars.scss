@@ -1,0 +1,9 @@
+@mixin app-scrollbars() {
+  .app-hide-scrollbars {
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+}
+

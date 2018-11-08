@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+@mixin sidenav-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+
+  .app-sidenav {
+    background-color: rgba(249, 248, 252, 1);
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.219607843137255);
+  }
+
+  .activeLink {
+    .mat-icon {
+      color: black !important;
+    }
+    .mat-list-text p {
+      color: black !important;
+      font-weight: 600 !important;
+      font-size: 12px;
+    }
+    background-color: rgb(229, 227, 234);
+    border-left: 6px solid #a2a3aa !important;
+  }
+
+  .mat-nav-list .mat-list-item.mat-list-item-focus {
+    background: rgb(229, 227, 234);
+  }
+  .mat-nav-list .mat-list-item:not(.activeLink):hover {
+      background-color: #edecf2;
+      border-left: 6px solid #e9e8ee !important;
+  }
+  .mat-nav-list .mat-list-item.activeLink:hover {
+    background-color: rgb(229, 227, 234);
+    border-left: 6px solid #a2a3aa !important;
+  }
+
+  .app-nav-item-pad {
+    border-left: 6px solid rgba(249, 248, 252, 1);
+  }
+
+  .app-nav-item-icon {
+    color: #666666;
+  }
+
+  .app-nav-item-text {
+    color: #666666;
+  }
+
+}

@@ -1,0 +1,18 @@
+@import '~@angular/material/theming';
+
+@mixin app-dialogs-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .main-backdrop {
+    //background-color: rgba(0, 0, 0, 0.52);
+    background: rgba(0, 0, 0, 0.5215686274509804);
+    opacity: 0.85 !important;
+  }
+  *:focus {
+    outline: 0 !important;
+  }
+}
+

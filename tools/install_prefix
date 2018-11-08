@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# the extractor script
+# extract the archive
+echo 
+echo "Installing the _APP_ Application"
+echo "==================================="
+echo 
+echo "Stopping _APP_"
+docker kill _APP_
+echo 
+echo "Removing the old _APP_ application"
+docker rm -f _APP_
+docker image rm -f `docker images | grep _APP_ | awk '{print $3}'`
+echo 
+echo "Loading _APP_ _RELEASE_"
+sed -e '1,/^__ARCHIVE_BEGIN__$/d' "$0" | docker load
+echo 
+echo "Starting _APP_  _RELEASE_"
+docker run --name _APP_ -p 0.0.0.0:10010:10010 -d -t _APP_:_RELEASE_
+
+exit 0
+
+__ARCHIVE_BEGIN__

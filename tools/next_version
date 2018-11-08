@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+with open('version', 'r') as fd:
+    cur_ver = fd.read().strip()
+    cur_ver_parts = cur_ver.split('.')
+    cur_ver_parts[-1] = str(int(cur_ver_parts[-1]) + 1).zfill(len(cur_ver_parts[-1]))
+    print '.'.join(cur_ver_parts)
+

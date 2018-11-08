@@ -1,0 +1,9 @@
+FROM centos:7
+
+ADD _bin/backend .
+ADD _bin/staticui.zip .
+
+EXPOSE 10010
+CMD ./backend
+
+

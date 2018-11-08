@@ -1,0 +1,27 @@
+@import '../../../../../styles/utils';
+
+.app-default-sidemenu {
+  overflow-y: auto;
+
+  .mat-button {
+    padding: 9px;
+    position: relative;
+    h3 {
+      margin: 0;
+    }
+    .app-default-sidemenu__end_detail {
+      min-width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: .75em;
+      position: absolute;
+      top: 16px;
+      left: 50%;
+    }
+    .mat-icon {
+      @include icon-sizing(16px);
+    }
+  }
+}

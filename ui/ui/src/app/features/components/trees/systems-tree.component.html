@@ -1,0 +1,39 @@
+<mat-card class="mat-elevation-z2"
+  [ngClass]="{'app-system-tree-card-expanded': treeExpanded, 'app-system-tree-card-collapsed' : !treeExpanded}">
+  <mat-tab-group class="app-system-tree-tab-group" #tabGroup [@.disabled]="true" *ngIf="treeExpanded">
+    <mat-tab  mat-stretch-tabs *ngFor="let t of tabs;">
+      <ng-template mat-tab-label>
+          {{t.label}}
+      </ng-template>
+      <ng-template matTabContent>
+        <mat-toolbar class="app-system-tree-toolbar-top mat-elevation-z1">
+          <button (click)="runAddDomainNode()" *ngIf="t.name === 'structure'" mat-icon-button class="app-system-tree-toolbar-buttons" pTooltip="Add Domain Node" tooltipPosition="right">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </mat-toolbar>
+        <div class="tree-wrapper">
+        <p-tree *ngIf="treeExpanded"
+                [value]="structureTree"
+                selectionMode="single"
+                [(selection)]="selectedNode"
+                (onNodeExpand)="nodeExpanded($event)"
+                (onNodeSelect)="nodeSelect($event)"
+                (onNodeUnselect)="nodeUnselect($event)">
+        </p-tree>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-card-content *ngIf="!treeExpanded">
+    <div class="app-systems-tree-collapsed-text">STRUCTURE & TAGS</div>
+  </mat-card-content>
+  <mat-toolbar class="app-systems-tree-action-toolbar">
+    <a (click)="toggleStructureCollapse()">
+      <mat-icon *ngIf="treeExpanded" class="app-system-tree-toggle" fontSet="icon"
+                fontIcon="icon-keyboard_arrow_left"></mat-icon>
+      <mat-icon *ngIf="!treeExpanded" class="app-system-tree-toggle" fontSet="icon"
+                fontIcon="icon-keyboard_arrow_right"></mat-icon>
+    </a>
+    <mat-icon *ngIf="treeExpanded" class="app-system-pin-toggle" fontSet="icon" fontIcon="icon-pin"></mat-icon>
+  </mat-toolbar>
+</mat-card>

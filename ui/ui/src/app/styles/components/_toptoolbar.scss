@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+
+@mixin top-toolbar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+
+  .app-top-toolbar {
+    background: linear-gradient(125deg, rgba(69, 28, 150, 1) 0%, rgba(69, 28, 150, 1) 11%, rgba(5, 122, 215, 1) 100%, rgba(5, 122, 215, 1) 100%);
+    color: #b4d4f0;
+  }
+}

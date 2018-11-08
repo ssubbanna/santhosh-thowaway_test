@@ -1,0 +1,28 @@
+@import '../../../../styles/utils';
+
+.app-footer {
+  z-index: 5;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  .mat-icon {
+    color: inherit;
+    @include icon-sizing(16px);
+    width: 48px;
+  }
+}
+
+.app-transparent-footer {
+  background: transparent;
+  color: inherit;
+  box-shadow: none
+}
+
+.mat-toolbar-multiple-rows {
+  min-height: 32px !important;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 30px !important;
+}

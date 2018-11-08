@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+@mixin vertical-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+
+  .app-vertical-menu-collapsible-top {
+    border-bottom: 1px solid #d6d6d6;
+    background-color: rgba(249, 248, 252, 1);
+  }
+
+  .app-sidenav-toggle {
+    color: mat-color($primary);
+  }
+
+  .app-sidenav-logo {
+    color: mat-color($primary);
+  }
+  .app-vertical-menu-collapsible-sidemenu-heading-text {
+    color: mat-color($primary);
+  }
+}

@@ -1,0 +1,29 @@
+<div fxFlexFill fxLayout="column">
+  <mat-toolbar class="app-vertical-menu-collapsible-top">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="center center">
+      <a *ngIf="!ShowMiniSideNav" (click)="toggleMiniSideNav()">
+        <mat-icon class="app-sidenav-toggle" fontSet="fas" fontIcon="fa-caret-left"></mat-icon>
+      </a>
+      <a *ngIf="ShowMiniSideNav" (click)="toggleMiniSideNav()">
+        <mat-icon class="app-sidenav-toggle" fontSet="fas" fontIcon="fa-caret-right"></mat-icon>
+      </a>
+      <mat-icon class="app-sidenav-logo" fontSet="icon" fontIcon="icon-network"></mat-icon>
+      <div *ngIf="!ShowMiniSideNav" class="app-vertical-menu-collapsible-sidemenu-heading-text">
+        {{productName}}
+      </div>      <span *ngIf="!ShowMiniSideNav" fxFlex></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div fxFlex="nogrow noshrink" class="app-vertical-menu-collapsible-sidemenu app-hide-scrollbars" fxLayout="column">
+    <mat-nav-list>
+      <ng-container *ngFor="let item of navItems">
+        <mat-list-item *ngIf="!item.menu" class='app-nav-item-pad' routerLinkActive="activeLink" [routerLink]='[item.path]' >
+          <mat-icon class="app-nav-item-icon" mat-list-icon *ngIf="!ShowMiniSideNav">{{item.icon}}</mat-icon>
+          <mat-icon class="app-nav-item-icon" mat-list-icon *ngIf="ShowMiniSideNav" pTooltip="{{item.text}}" tooltipPosition="right">{{item.icon}}
+          </mat-icon>
+          <p matLine *ngIf="!ShowMiniSideNav" class="app-nav-item-text">{{item.text}}</p>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+
+  </div>
+</div>

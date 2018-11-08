@@ -1,0 +1,69 @@
+@import '../../../../../styles/utils';
+
+.app-vertical-menu-collapsible-top {
+  .mat-icon {
+    @include icon-sizing(22px);
+  }
+}
+
+.app-vertical-menu-collapsible-sidemenu {
+  overflow-y: auto;
+  .mat-icon {
+    @include icon-sizing(16px);
+  }
+}
+
+.app-vertical-menu-collapsible-sidemenu-heading-text {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 12px;
+  padding-left: 30px;
+  padding-top: 3px;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  padding: 0 !important;
+  height: 45px !important;
+  place-content: unset !important;
+}
+
+.mat-toolbar-multiple-rows {
+  min-height: 45px !important;
+}
+
+.sidenav-tooltip {
+  font-size: 16px;
+}
+
+.mat-list, .mat-nav-list, .mat-selection-list {
+  padding-top: 0;
+}
+
+.mat-list, .mat-nav-list .mat-list-item {
+  height: 40px;
+}
+:host /deep/ .mat-list-item-content {
+  padding: 16px 10px 16px 5px !important;
+}
+
+:host /deep/ .mat-list-text {
+  padding-right: 0 !important;
+  padding-left: 7px !important;
+}
+
+.app-sidenav-toggle {
+  font-size: 12px !important;
+  width: 8px !important;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.app-sidenav-logo {
+  width: 0 !important;
+}
+
+.app-nav-item-text {
+  font-size: 12px !important;
+  font-weight:700 !important;
+}
+

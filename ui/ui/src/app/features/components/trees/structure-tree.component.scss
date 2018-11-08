@@ -1,0 +1,62 @@
+.tree-wrapper {
+  max-height: 79.67vh;
+  overflow: auto;
+}
+
+.app-structure-tree-heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #451C96;
+  padding-left: 30px;
+  padding-top: 4px;
+}
+
+.app-structure-tree-toggle {
+  font-size: 12px !important;
+  width: 4px !important;
+  height: 25px !important;
+  margin-left: 4px;
+  cursor: pointer;
+  color: #451C96;
+}
+
+.app-structure-tree-icon {
+  width: 0 !important;
+  color: #451C96;
+  cursor: pointer;
+}
+
+.app-structure-tree-action-icon {
+  color:  #646365;
+  font-size: 18px;
+  height: unset !important;
+}
+
+.app-structure-tree-card-expanded {
+  height: 100%;
+  width:350px;
+  padding: 0;
+}
+.app-structure-tree-card-collapsed {
+  height: 100%;
+  width:45px;
+  padding: 0;
+}
+
+.app-structure-tree-toolbar {
+  height: 45px;
+  background: #f9f8fc;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  padding: 0 3px;
+}
+
+.app-structure-tree-collapsed-text {
+  color: #451C96;
+  font-weight: 600;
+  margin-top: 75px !important;
+  font-size: 15px;
+  transform: rotate(270deg);
+}

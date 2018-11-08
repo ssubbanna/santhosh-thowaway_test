@@ -1,0 +1,44 @@
+<mat-toolbar class="app-top-toolbar mat-elevation-z1">
+  <mat-toolbar-row>
+    <button *ngIf="showMenuIcon()" mat-icon-button (click)="sidenav.open()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="app-toolbar-domain" *ngIf="domainNode">
+      <mat-icon  class="app-toolbar-icon" fontSet="icon"
+                fontIcon="icon-world"></mat-icon>
+      <span class="app-toolbar-text">{{domainNode}}</span>
+    </div>
+    <mat-icon *ngIf="domainPath" class="app-toolbar-icon" fontSet="icon"
+              fontIcon="icon-tree"></mat-icon>
+    <span class="app-toolbar-text">{{domainPath}}</span>
+    <span fxFlex></span>
+    <!-- Help -->
+    <button mat-icon-button pTooltip="Help" tooltipPosition="bottom">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+
+    <!--Social-->
+    <button mat-icon-button pTooltip="Share" tooltipPosition="bottom">
+      <mat-icon>share</mat-icon>
+    </button>
+
+    <!--Search-->
+    <button mat-icon-button pTooltip="Search" tooltipPosition="bottom">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <!-- Alarms -->
+    <button mat-icon-button pTooltip="Alarms" tooltipPosition="bottom">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <!-- Account -->
+    <button mat-icon-button pTooltip="Profile" tooltipPosition="bottom">
+      <mat-icon>person</mat-icon>
+    </button>
+    <div class="app-toolbar-logo-wrapper" (click)="openApps()" pTooltip="Apps" tooltipPosition="bottom">
+      <img class="app-toolbar-logo" [src]="logo" alt="Apps">
+    </div>
+    <span style="padding-right:15px;"></span>
+  </mat-toolbar-row>
+</mat-toolbar>

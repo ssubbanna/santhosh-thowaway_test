@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+
+@mixin app-background-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .app-content-bg {
+    background: #f2f2f2; //mat-color($background, card);
+    color: mat-color($foreground, text);
+  }
+
+  .app-accent-bg {
+    background: linear-gradient(125deg, mat-color($accent), mat-color($accent, darker));
+    color: mat-color($accent, default-contrast);
+    p a {
+      color: mat-color($accent, default-contrast);
+      text-decoration: underline;
+    }
+  }
+
+  .app-primary-bg {
+    background: linear-gradient(125deg, mat-color($primary), mat-color($primary, darker));
+    color: mat-color($primary, default-contrast);
+    p a {
+      color: mat-color($primary, default-contrast);
+      text-decoration: underline;
+    }
+  }
+}

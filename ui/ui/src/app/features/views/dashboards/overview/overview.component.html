@@ -1,0 +1,50 @@
+<!--<div class="row" style="height: 100%; width:100%; margin-right: 0; margin-left: 0;">
+  <app-structure-tree [requestChartData]='true' (OnNodeSelectChartData)="fetchChartData($event)"></app-structure-tree>
+
+  <div class="row " style="margin-right: 15px; margin-left: 15px;">
+    <div *ngFor="let card of widgets;" [ngClass]="card.size" style="padding-top: 15px;">
+      <mat-card style="height:440px;">
+        <mat-card-header>
+          <mat-card-title style="color:#450095; font-weight: 700">{{card.name}}</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div>-->
+<div class="container-fluid app-hide-scrollbars" style="height: 100%; width:100%; padding-left: 0; padding-right: 0;">
+  <div class="row" style="height: 100%; width:100%; margin-right: 0; margin-left: 0;">
+    <div class="col tree-sidebar">
+      <app-structure-tree [expandableDomainNodes]='false' [requestChartData]='true'
+                          (OnNodeSelectChartData)="fetchChartData($event)"></app-structure-tree>
+    </div>
+    <div class="col text-center" style="overflow: auto; padding-bottom: 15px;">
+      <div class="row " style="margin-right: 15px; margin-left: 15px; min-width: 50vh;">
+        <div *ngFor="let chart of widgets;" [ngClass]="chart.size" style="padding-top: 15px;">
+          <mat-card class="app-dashboard-card">
+            <mat-card-header>
+              <mat-card-title style="color:#450095; font-weight: 600; font-size: 18px;">{{chart.name}}</mat-card-title>
+            </mat-card-header>
+            <div style="height: 260px;" pTooltip="{{chart.tooltip}}" tooltipPosition="top"  tooltipStyleClass="chart-tooltip">
+              <mwl-gauge
+                [ngClass]="chart.class"
+                [max]="chart.maxValue"
+                [dialStartAngle]="180"
+                [dialEndAngle]="0"
+                [value]="chart.value"
+                [animated]="true"
+                [animationDuration]="2">
+              </mwl-gauge>
+            </div>
+            <mat-card-actions class="app-dashboard-card-actions">
+              <mat-list>
+                <mat-list-item *ngFor="let sum of chart.actions">
+                  <span style="color: #666666; font-weight: 500;">{{sum.tooltip}}</span>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

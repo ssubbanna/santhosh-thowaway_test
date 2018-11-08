@@ -1,0 +1,23 @@
+version: "3"
+services:
+    rest:
+        image: abhsob/extreme_central_rest:1.0
+        ports:
+            - "6080:6080"
+        depends_on:
+            - redis
+    redis:
+        image: redis:3.2.4
+    ztpplus:
+        image: kyohejr/ztpplus-server
+        ports:
+            - "38443:8443"
+        depends_on:
+            - redis
+            - rest
+    ui:
+        image: benledwards/extreme_central_poc_ui:1.0
+        ports:
+            - "3000:80"
+        depends_on:
+            - rest

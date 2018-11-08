@@ -1,0 +1,142 @@
+.tree-sidebar {
+  -ms-flex: 0 0 45px;
+  flex: 0 0 45px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (max-width: 690px) {
+  /*.tree-sidebar {
+    display: none;
+  }*/
+}
+
+.chart-tooltip {
+  font-size: 16px;
+  top: 10px;
+}
+
+.ui-tooltip {
+  max-width: 400px;
+  white-space: pre-wrap;
+}
+
+
+.app-dashboard-card {
+  height:45vh;
+  padding:16px;
+}
+.app-dashboard-card-actions {
+  background-color: #f9f8fc;
+  height: 15vh;
+  padding: 0;
+  bottom: 17px;
+  right: 16px;
+  width: 100%;
+  position: absolute;
+}
+
+@media (max-width: 599px) {
+  .mat-card-actions {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: 0 !important;
+  }
+}
+
+mwl-gauge {
+  width: 100%;
+}
+
+mwl-gauge > .gauge > .dial {
+  stroke: #eee;
+  stroke-width: 2;
+  fill: rgba(0, 0, 0, 0);
+}
+
+mwl-gauge > .gauge > .value {
+  stroke: rgb(47, 227, 255);
+  stroke-width: 2;
+  fill: rgba(0, 0, 0, 0);
+}
+
+mwl-gauge > .gauge > .value-text {
+  fill: rgb(47, 227, 255);
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+/* ------- Green Style ------- */
+mwl-gauge.LOW {
+}
+
+mwl-gauge.LOW > .gauge > .dial {
+  stroke: #dfdedf;
+  stroke-width: 9;
+}
+
+mwl-gauge.LOW > .gauge > .value {
+  stroke: #00a655;
+  stroke-dasharray: none;
+  stroke-width: 9;
+}
+
+mwl-gauge.LOW > .gauge > .value-text {
+  fill: #00a655;
+  display: none;
+}
+
+/* ------- Red Style ------- */
+mwl-gauge.HIGH {
+}
+
+mwl-gauge.HIGH > .gauge > .dial {
+  stroke: #dfdedf;
+  stroke-width: 9;
+}
+
+mwl-gauge.HIGH > .gauge > .value {
+  stroke: #e3004c;
+  stroke-dasharray: none;
+  stroke-width: 9;
+}
+
+mwl-gauge.HIGH > .gauge > .value-text {
+  fill: #e3004c;
+  display: none;
+}
+
+/* ------- orange Style ------- */
+mwl-gauge.orange {
+}
+
+mwl-gauge.orange > .gauge > .dial {
+  stroke: #dfdedf;
+  stroke-width: 9;
+}
+
+mwl-gauge.orange > .gauge > .value {
+  stroke: #ebb42f;
+  stroke-dasharray: none;
+  stroke-width: 9;
+}
+
+mwl-gauge.orange > .gauge > .value-text {
+  fill: #ebb42f;
+  display: none;
+}
+
+.gauge-width {
+  width: 100% !important;
+  height: 100% !important;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .reading-label {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}

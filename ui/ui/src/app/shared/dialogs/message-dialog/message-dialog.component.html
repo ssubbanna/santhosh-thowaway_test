@@ -1,0 +1,9 @@
+<div class="header">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+</div>
+<mat-dialog-content>
+  <p [innerHTML]="data.text" style="font-style: normal"></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="ok()">Ok</button>
+</mat-dialog-actions>

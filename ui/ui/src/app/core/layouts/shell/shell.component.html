@@ -1,0 +1,32 @@
+<mat-sidenav-container dir='ltr' fxFlexFill autosize (backdropClick)="closeApps()">
+  <!-- left nav -->
+  <mat-sidenav class="app-sidenav" #leftSidenav [fixedInViewport]="fixed"
+               [ngClass]="{'app-leftsidenav-expanded': !miniSideNav}" [mode]="leftSidenavMode"
+               [(opened)]="leftSidenavOpen">
+    <app-vertical-menu-collapsible  [ShowMiniSideNav]="miniSideNav"
+                                   [sidenav]="leftSidenav"></app-vertical-menu-collapsible>
+  </mat-sidenav>
+
+  <mat-sidenav #rightSidenav [opened]="showApps" position="end" class="app-default-rightsidenav">
+    <app-switcher></app-switcher>
+  </mat-sidenav>
+
+
+  <!-- main content -->
+  <div fxLayout="column" fxFlexFill>
+    <!-- top toolbar -->
+    <app-top-toolbar [sidenav]='leftSidenav' class="mat-elevation-z7"></app-top-toolbar>
+
+    <!-- content -->
+    <div fxLayout="column" fxFlex="nogrow noshrink" class="app-content-wrapper app-content-bg">
+      <div fxFlexFill class="app-content">
+        <router-outlet></router-outlet>
+
+      </div>
+    </div>
+
+    <!-- footer
+    <app-footer></app-footer>
+    -->
+  </div>
+</mat-sidenav-container>

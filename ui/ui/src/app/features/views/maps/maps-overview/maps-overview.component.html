@@ -1,0 +1,78 @@
+<div class="app-map-page-loader" *ngIf="!mapReady">
+  <div style="text-align: center">Loading Map...</div>
+  <sk-wave [color]="'#461892'"></sk-wave>
+</div>
+
+<div class="outer-map-wrapper" *ngIf="mapReady">
+  <div class="map-wrapper" id="wrapper" #wrapper>
+    <agm-map
+      [scrollwheel]="true"
+      [streetViewControl]='false'
+      id="AgmMap"
+      #AgmMap
+      [zoom]="zoom"
+      (idle)="idle()"
+      (centerChange)="centerChange($event)">
+      <agm-marker *ngFor="let m of markers"
+                  [latitude]="m.lat"
+                  [longitude]="m.long"
+                  [markerClickable]="true"
+                  [label]="{
+                            color: '#ffffff',
+                            fontWeight: 'bold',
+                            text: (m.iconText).toString()
+                            }"
+                  [iconUrl]="m.icon"
+                  (mouseOver)="openWindow(m.id)"
+                  (markerClick)="openWindow(m.id)">
+        <agm-info-window
+          [maxWidth]="800"
+          [isOpen]="isInfoWindowOpen(m.id)"
+          [latitude]="m.lat"
+          [longitude]="m.lng">
+          <mat-card style="padding: 1px; box-shadow: unset; width: 56vh;">
+            <mat-card-header>
+              <mat-card-title>Site: {{m.siteName}}</mat-card-title>
+              <mat-card-subtitle>Domain Node: {{m.domainNode}}</mat-card-subtitle>
+              <mat-card-subtitle>Path: {{m.sitePath}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content style="padding-left: 6px;">
+              <div class="row" style="margin-left: 0; margin-right: 0; padding-bottom: 10px;">
+                <div class="col-md-5" style="border: 1px solid #21af8e; background: rgba(33, 175, 142, 0.121568627450980390);">
+                  <div style="color: #21af8e; font-size: 40px; text-align: center;font-weight: 500">{{m.deviceCount}}</div>
+                  <div *ngIf="m.deviceCount === 1" style="color: #21af8e; font-size: 20px; text-align: center; font-weight: 500">DEVICE</div>
+                  <div *ngIf="m.deviceCount > 1" style="color: #21af8e; font-size: 20px; text-align: center; font-weight: 500">DEVICES</div>
+                  <div *ngIf="m.deviceCount === 0" style="color: #21af8e; font-size: 20px; text-align: center; font-weight: 500">DEVICES</div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5"  style="border: 1px solid #ef4547; background: rgba(239, 69, 71, 0.13);">
+                  <div style="color: #ef4547; font-size: 40px; text-align: center;font-weight: 500">{{m.alarms}}</div>
+                  <div *ngIf="m.alarms === 1" style="color: #ef4547; font-size: 20px; text-align: center; font-weight: 500">ALARM</div>
+                  <div *ngIf="m.alarms > 1" style="color: #ef4547; font-size: 20px; text-align: center; font-weight: 500">ALARMS</div>
+                  <div *ngIf="m.alarms === 0" style="color: #ef4547; font-size: 20px; text-align: center; font-weight: 500">ALARMS</div>
+                </div>
+              </div>
+              <div class="row" style="margin-left: 0; margin-right: 0">
+                <div class="col-md-5" style="border: 1px solid #E9B408; background: rgba(233, 180, 7, 0.07);">
+                  <div style="color: #E9B408; font-size: 40px; text-align: center; font-weight: 500">{{m.threats}}</div>
+                  <div *ngIf="m.threats === 1" style="color: #E9B408; font-size: 20px; text-align: center; font-weight: 500">THREAT</div>
+                  <div *ngIf="m.threats > 1" style="color: #E9B408; font-size: 20px; text-align: center; font-weight: 500">THREATS</div>
+                  <div *ngIf="m.threats === 0" style="color: #E9B408; font-size: 20px; text-align: center; font-weight: 500">THREATS</div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5"  style="border: 1px solid #000000; background: rgba(0, 0, 0, 0.13)">
+                  <div style="color: #000000; font-size: 40px; text-align: center;font-weight: 500">{{m.endSystems}}</div>
+                  <div  *ngIf="m.endSystems === 1" style="color: #000000; font-size: 20px; text-align: center; font-weight: 500">END SYSTEM</div>
+                  <div  *ngIf="m.endSystems > 1" style="color: #000000; font-size: 20px; text-align: center; font-weight: 500">END SYSTEMS</div>
+                  <div  *ngIf="m.endSystems === 0" style="color: #000000; font-size: 20px; text-align: center; font-weight: 500">END SYSTEMS</div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+@import '../../../styles/utils';
+
+.app-leftsidenav-expanded {
+  width: 150px;
+}
+
+.app-leftsidenav-collapsed {
+  width: 50px;
+}
+
+.app-content-wrapper {
+  position: relative;
+}
+
+.app-content {
+  overflow-y: auto;
+}
+
+.app-default-rightsidenav {
+  width: 300px;
+}
+
