@@ -7,31 +7,9 @@ jobs:
      - checkout
 
      - run:
-         name: Build image
+         name: Execution of make command  
          command: make
 
- deploy:
-   machine: true
-
-   steps:
-     - setup_remote_docker:
-         docker_layer_caching: true
-
-     - attach_workspace:
-         at: /workspace
-
-     - run:
-         name: Load image
-         command: cd tar && docker load -i $CIRCLE_PROJECT_REPONAME.tar
-     - run:
-         name: Login to docker hub
-         command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-     - run:
-         name: Deploy saas_ux image to docker hub
-         command: docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:dev
-
-workflows:
-  version: 2
   commit-workflow:
     jobs:
       - build:
@@ -39,11 +17,3 @@ workflows:
             tags:
               only:
                 - /.*/
-
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
