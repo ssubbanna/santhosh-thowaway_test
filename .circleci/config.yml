@@ -1,18 +1,14 @@
 defaults: &defaults
   working_directory: /workspace
 
-  docker:
-     - image: docker:stable
-
 version: 2
 jobs:
  build:
    <<: *defaults
+   machine: true
+
    steps:
      - checkout
-
-     - setup_remote_docker:
-         docker_layer_caching: true
 
      - run:
          name: Build image
@@ -20,6 +16,8 @@ jobs:
 
  deploy:
    <<: *defaults
+   machine: true
+
    steps:
      - setup_remote_docker:
          docker_layer_caching: true
