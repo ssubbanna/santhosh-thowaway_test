@@ -10,6 +10,8 @@ jobs:
          name: Execution of make command  
          command: make
 
+workflows:
+  version: 2
   commit-workflow:
     jobs:
       - build:
