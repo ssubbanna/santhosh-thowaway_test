@@ -1,0 +1,56 @@
+defaults: &defaults
+  working_directory: /workspace
+
+  docker:
+     - image: docker:stable
+
+version: 2
+jobs:
+ build:
+   <<: *defaults
+   steps:
+     - checkout
+
+     - setup_remote_docker:
+         docker_layer_caching: true
+
+     - run:
+         name: Build image
+         command: make
+
+ deploy:
+   <<: *defaults
+   steps:
+     - setup_remote_docker:
+         docker_layer_caching: true
+
+     - attach_workspace:
+         at: /workspace
+
+     - run:
+         name: Load image
+         command: cd tar && docker load -i $CIRCLE_PROJECT_REPONAME.tar
+     - run:
+         name: Login to docker hub
+         command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+     - run:
+         name: Deploy saas_ux image to docker hub
+         command: docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:dev
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only:
+                - /.*/
+
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
