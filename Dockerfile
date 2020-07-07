@@ -16,3 +16,5 @@ COPY _bin/version /app/bin
 
 EXPOSE 10010
 CMD /app/bin/backend
+
+#add extra line
