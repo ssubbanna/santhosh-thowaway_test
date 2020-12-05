@@ -1,0 +1,21 @@
+version: 2
+jobs:
+ build:
+   machine: true
+
+   steps:
+     - checkout
+
+     - run:
+         name: Execution of make command  
+         command: make
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only:
+                - /.*/
